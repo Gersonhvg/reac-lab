@@ -1,0 +1,81 @@
+## 🐳 **Docker Configuration (Opcional)**
+
+version: '3.8'
+
+services:
+  react-16:
+    build:
+      context: ./versions/react-16
+      dockerfile: ../../docker/Dockerfile.react
+      args:
+        - NODE_VERSION=18
+        - REACT_VERSION=16.8.6
+    ports:
+      - "3016:3016"
+    volumes:
+      - ./versions/react-16/src:/app/src
+      - ./shared:/app/shared
+    environment:
+      - REACT_VERSION=16.8.6
+      - VITE_PORT=3016
+
+  react-17:
+    build:
+      context: ./versions/react-17
+      dockerfile: ../../docker/Dockerfile.react
+      args:
+        - NODE_VERSION=18
+        - REACT_VERSION=17.0.2
+    ports:
+      - "3017:3017"
+    volumes:
+      - ./versions/react-17/src:/app/src
+      - ./shared:/app/shared
+    environment:
+      - REACT_VERSION=17.0.2
+      - VITE_PORT=3017
+
+  react-18:
+    build:
+      context: ./versions/react-18
+      dockerfile: ../../docker/Dockerfile.react
+      args:
+        - NODE_VERSION=18
+        - REACT_VERSION=18.3.1
+    ports:
+      - "3018:3018"
+    volumes:
+      - ./versions/react-18/src:/app/src
+      - ./shared:/app/shared
+    environment:
+      - REACT_VERSION=18.3.1
+      - VITE_PORT=3018
+
+  react-19:
+    build:
+      context: ./versions/react-19
+      dockerfile: ../../docker/Dockerfile.react
+      args:
+        - NODE_VERSION=20
+        - REACT_VERSION=19.1.0
+    ports:
+      - "3019:3019"
+    volumes:
+      - ./versions/react-19/src:/app/src
+      - ./shared:/app/shared
+    environment:
+      - REACT_VERSION=19.1.0
+      - VITE_PORT=3019
+
+  dashboard:
+    image: nginx:alpine
+    ports:
+      - "3000:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./docs:/usr/share/nginx/html
+    depends_on:
+      - react-16
+      - react-17
+      - react-18
+      - react-19
