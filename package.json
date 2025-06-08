@@ -35,6 +35,6 @@
     "cross-spawn": "^7.0.3"
   },
   "keywords": ["react", "learning", "multi-version", "typescript", "vite"],
-  "author": "Tu Nombre",
+  "author": "Gersonhvg",
   "license": "MIT"
 }
